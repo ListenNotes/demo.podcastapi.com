@@ -12,7 +12,7 @@ export async function onRequest(context) {
     const queryParams = new URLSearchParams({
         q: 'startup',
     });
-    const url = `https://listen-api.listennotes.com/api/v2/search?${queryParams}`;
+    const url = `https://listen-api-test.listennotes.com/api/v2/search?${queryParams}`;
 
     // let formData = new FormData();
     // formData.append('name', 'John');
