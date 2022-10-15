@@ -1,18 +1,28 @@
+import React from 'react';
 import './App.css';
 
-const App = () => {
-    (async () => {
-        const response = await fetch('/api/search', {
+export default class App extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            text: '',
+        }
+    }
+
+    componentDidMount() {
+        fetch('/api/search', {
             method: 'GET',
+        }).then((response) => response.text()).then((text) => {
+           this.setState({
+              text,
+           });
         });
-        console.log(response);
-    })();
+    }
 
-    return (
-        <div className="text-3xl font-bold underline">
-            hello, current time is:
-        </div>
-    );
+    render() {
+        return (<div>
+            From functions: {this.state.text}
+        </div>);
+    }
 }
-
-export default App;
