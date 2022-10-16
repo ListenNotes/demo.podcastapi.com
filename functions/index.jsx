@@ -1,7 +1,17 @@
+import React from "react";
+import ReactDOMServer from "react-dom/server";
+
+class HelloMessage extends React.Component {
+  render() {
+    return <div>Hello, {this.props.name} from React server-side rendering</div>;
+  }
+}
+
 class ServerSideElementHandler {
   async element(element) {
+    const fromReact = ReactDOMServer.renderToString(<HelloMessage name="World" />);
     element.replace(
-      '<div class="text-xl font-bold red-500">Rendered from Functions (server-side)</div>',
+      '<div class="text-xl font-bold">Rendered from Functions (server-side)</div>' + fromReact,
       { html: true });
   }
 }

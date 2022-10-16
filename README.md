@@ -12,5 +12,5 @@ Proof of concept work:
   * Some uses:
     * AJAX endpoints to wrap 3rd party REST APIs (and hide api keys) and returns json, e.g., /api/search
     * Server-side rendering using HTMLRewriter to manipulate raw html
-      * TODO: try server-side react rendering
+      * Server-side react rendering works!
     * Maybe some traditionally server-side tasks
