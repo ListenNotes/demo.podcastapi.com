@@ -8,5 +8,23 @@ module.exports = {
   "parserOptions": {
     "ecmaVersion": 12
   },
-  "rules": {}
+  "rules": {},
+
+  "overrides": [
+    {
+      "files": ["**/functions/**/*.js"],
+      "env": {
+        "node": false,
+        "worker": true,
+        "commonjs": true,
+        "es2021": true
+      },
+      "parserOptions": {
+        "sourceType": "module"
+      },
+      "globals": {
+        "HTMLRewriter": "readonly"
+      }
+    }
+  ]
 };
