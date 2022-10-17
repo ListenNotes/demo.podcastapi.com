@@ -1,4 +1,4 @@
-# ListenApiDemo (Cloudflare Pages)
+# Podcast API Demo (Cloudflare Pages)
 
 ![Apache 2](https://img.shields.io/hexpm/l/plug.svg)
 
