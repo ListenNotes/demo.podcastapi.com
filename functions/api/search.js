@@ -10,6 +10,10 @@ export async function onRequest(context) {
     // data, // arbitrary space for passing data between middlewares
   } = context;
 
+  // On local dev, you can pass LISTEN_API_KEY via command line:
+  //   LISTEN_API_KEY=xxxxxx yarn dev
+  //
+  // On production, you can pass LISTEN_API_KEY via environment variable in Cloudflare Pages dashboard
   const client = ClientForWorkers({
     apiKey: env.LISTEN_API_KEY || null,
   });
@@ -27,6 +31,9 @@ export async function onRequest(context) {
       type,
       offset,
     });
+    if (!env.LISTEN_API_KEY) {
+      res.data.from_mock_server = true;
+    }
     return new Response(JSON.stringify(res.data), {
       headers: {
         'content-type': 'application/json;charset=UTF-8',

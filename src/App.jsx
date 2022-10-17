@@ -95,8 +95,7 @@ class App extends Component {
       sortByDate: '0',
       searchType: 'episode',
       resultType: 'episode',
-      quotaExceeded: false,
-      errorOccurred: false
+      errorMessage: null,
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -119,26 +118,27 @@ class App extends Component {
           data: response.data,
           resultType: this.state.searchType,
           offset: 0,
-          quotaExceeded: false,
-          errorOccurred: false
+          errorMessage: null,
         }))
       })
       .catch(error => {
-        if (error.response.status === 429) {
-          this.setState(() => ({
-            data: [],
-            offset: 0,
-            quotaExceeded: true,
-            errorOccurred: false
-          }))
-        } else {
-          this.setState(() => ({
-            data: [],
-            offset: 0,
-            quotaExceeded: false,
-            errorOccurred: true
-          }))
+        let errorMessage = '';
+        switch (error.response.status) {
+          case 401:
+            errorMessage = 'Wrong API Key. Get a valid api key: https://www.listennotes.com/api/pricing/';
+            break;
+          case 429:
+            errorMessage = 'You have reached your monthly quota limit.';
+            break;
+          default:
+            errorMessage = 'Unknown error.';
+            break;
         }
+        this.setState(() => ({
+          data: [],
+          offset: 0,
+          errorMessage,
+        }));
       })
   }
 
@@ -178,13 +178,15 @@ class App extends Component {
         Next page ({this.state.data.next_offset / RESULTS_PER_PAGE + 1} of {(this.state.data.total / RESULTS_PER_PAGE + 1).toFixed()})
       </span>
     ) : null
-    const quotaExceededMessage = this.state.quotaExceeded ? (<p>Quota exceeded.</p>) : null
-    const errorOccurredMessage = this.state.errorOccurred ? (<p>An error occurred.</p>) : null
+    const errorOccurredMessage = this.state.errorMessage ? (<p className="text-red-500 font-bold">An error occurred: {this.state.errorMessage}</p>) : null
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Podcast API Demo</h1>
         </header>
+        {this.state.data && this.state.data.from_mock_server && <div className="text-red-500 font-bold">
+          Note: Results are from <a href="https://www.listennotes.help/article/48-how-to-test-the-podcast-api-without-an-api-key" target="_blank">api mock server</a>. To get real data, you need to <a href="https://www.listennotes.com/api/pricing/" target="_blank">get an API key</a> and set the environment variable LISTEN_API_KEY on <a href="https://developers.cloudflare.com/pages/platform/build-configuration/" target="_blank">Cloudflare Pages dashboard</a>.
+        </div>}
         <form className="search-form" onSubmit={this.handleSubmit}>
           <input className="search-form-text" onChange={this.handleChange} type="text" placeholder="This American Life"
                  value={this.state.search}/>
@@ -207,7 +209,6 @@ class App extends Component {
           </div>
         </form>
         <div className="search-results">
-          {quotaExceededMessage}
           {errorOccurredMessage}
           {resultElements}
         </div>
@@ -215,14 +216,14 @@ class App extends Component {
           {nextPageElement}
         </div>
         <footer className="w-full flex justify-center items-center">
+          <div className="mr-2">
+            <a href="https://github.com/ListenNotes/demo.podcastapi.com" className="text-sm font-bold hover:opacity-50">
+              Source code @ GitHub
+            </a>
+          </div>
           <div>
             <a href="https://www.listennotes.com/api/">
               <img alt="Powered by ListenNotes" src={poweredByImage}/>
-            </a>
-          </div>
-          <div className="ml-2">
-            <a href="https://github.com/ListenNotes/demo.podcastapi.com" className="text-sm font-bold hover:opacity-50">
-              Source code @ GitHub
             </a>
           </div>
         </footer>

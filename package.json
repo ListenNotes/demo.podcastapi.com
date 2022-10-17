@@ -10,7 +10,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "dev": "wrangler pages dev -- npx react-scripts start"
+    "dev": "wrangler pages dev --binding LISTEN_API_KEY=$LISTEN_API_KEY -- npx react-scripts start"
   },
   "eslintConfig": {
     "extends": [
