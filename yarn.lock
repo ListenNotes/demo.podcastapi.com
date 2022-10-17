@@ -6302,10 +6302,10 @@ pkg-up@^3.1.0:
   dependencies:
     find-up "^3.0.0"
 
-podcast-api@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/podcast-api/-/podcast-api-2.0.1.tgz#b0888e44d7851754fb54020d30ef5cec48b5a913"
-  integrity sha512-hySE8t3z+dPppQ4ixB/ydXhd3EHh3JcHJ1G4MWrAF93wnXz+lPP1NUlCE7dhKnixhYHxxOqA+KqS3RvM7QbtKA==
+podcast-api@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/podcast-api/-/podcast-api-2.0.2.tgz#10d4f88981302622314f0e4eb84bc4026ed6ef2a"
+  integrity sha512-MKG/TxiQWezHBWxjBB/RGGP9IchsbLmTbEyhivI5SRIVKa/TMkDM1jr5FuRGVc5ovYFfTJlY5cYr2Xl92m572A==
   dependencies:
     axios "^0.21.1"
 
