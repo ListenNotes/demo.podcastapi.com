@@ -11,7 +11,7 @@ class EpisodeResult extends Component {
     this.state = {
       title: this.props.data.title_highlighted,
       podcastTitle: this.props.data.podcast_title_highlighted,
-      publisher: this.props.data.publisher_highlighted,
+      publisher: this.props.data.podcast.publisher_highlighted,
       thumbnail: this.props.data.thumbnail,
       audio: this.props.data.audio,
       audioLength: this.props.data.audio_length,
