@@ -4,8 +4,7 @@
 
 A simplified podcast search engine web app, using [Cloudflare Pages](https://pages.cloudflare.com/) (Javascript) and [Listen API](https://www.listennotes.com/api/).
 
-In the [functions](https://developers.cloudflare.com/pages/platform/functions/) code, we use our [official podcast api package](https://github.com/ListenNotes/podcast-api-js) to talk to
-Listen API.
+In the [functions](https://developers.cloudflare.com/pages/platform/functions/) code, we use our [official podcast api package](https://github.com/ListenNotes/podcast-api-js) to talk to Listen API.
 
 You can find code snippets in different languages on the [API Docs](https://www.listennotes.com/api/docs/) page,
 including [Node.js](https://github.com/ListenNotes/podcast-api-js),
