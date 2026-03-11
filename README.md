@@ -58,18 +58,25 @@ If LISTEN_API_KEY is not set, then we'll use the [API mock server](https://www.l
 
 Please follow instructions on [Cloudflare Pages Docs](https://developers.cloudflare.com/pages/get-started/) to deploy to production.
 
-<img width="798" alt="Screen Shot 2022-10-17 at 10 57 38 AM" src="https://user-images.githubusercontent.com/1719237/196250398-7cfe685f-05e7-4e19-a16d-7935e8864c50.png">
+You need to set the build command at /settings/production :
 
-<img width="804" alt="Screen Shot 2022-10-17 at 11 07 01 AM" src="https://user-images.githubusercontent.com/1719237/196250648-951fac58-c8ed-4e96-9849-c8b0f7b6297c.png">
+<img width="597" height="533" alt="Screenshot 2026-03-11 at 11 19 51 AM" src="https://github.com/user-attachments/assets/7e6f99c3-af4e-44b9-89af-9e265debc334" />
+
+And set Variables and Secrets at /settings/production#variables:
+
+<img width="798" height="797" alt="Screenshot 2026-03-11 at 11 20 40 AM" src="https://github.com/user-attachments/assets/ca037a0b-323a-43a8-9a48-a26fdc90a831" />
+
 
 ## Demo UI Screenshots
 *On desktop*
 
-![Desktop demo](https://github.com/wenbinf/ListenApiDemo/blob/master/resources/desktop.png)
+<img width="1572" height="1172" alt="PodcastAPI.com demo on Desktop" src="https://github.com/user-attachments/assets/59582263-7f0b-49da-8c5b-94f819d80312" />
+
 
 *On mobile*
 
-<img src="https://github.com/wenbinf/ListenApiDemo/blob/master/resources/mobile.png" alt="Mobile demo" width="300">
+<img width="400" height="868" alt="PodcastAPI.com demo on Mobile" src="https://github.com/user-attachments/assets/53937892-f567-4d5d-a23e-29ac12d78425" />
+
 
 ## Further readings
 
