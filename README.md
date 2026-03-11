@@ -86,7 +86,7 @@ And set Variables and Secrets at /settings/production#variables:
 * [General FAQ](https://www.listennotes.com/api/faq/)
 * [How to evaluate a 3rd party RESTful API?](https://www.listennotes.com/blog/how-to-evaluate-a-3rd-party-restful-api-47/)
 
-What have 4,700+ companies & developers built with Listen Notes Podcast API:
+What have 12,000+ companies & developers built with Listen Notes Podcast API:
 
 *   [E-Learning Platforms](https://www.listennotes.com/use-cases/elearning-platforms/)
 *   [Podcast Clipping Apps](https://www.listennotes.com/use-cases/podcast-clipping-apps/)
