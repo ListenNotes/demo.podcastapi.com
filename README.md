@@ -41,8 +41,8 @@ and a ReactJs implementation for a web frontend that talks to the Cloudflare Pag
 Make sure you're on Node.js 20+ for Wrangler 4.x.
 
 ```
-LISTEN_API_KEY=YOUR_SECRET_KEY yarn install
-yarn dev
+yarn install
+LISTEN_API_KEY=$YOUR_SECRET_KEY yarn dev
 ```
 
 [Where to get LISTEN_API_KEY](https://help.listennotes.com/en/articles/3416436-how-to-get-an-api-token-of-listen-notes-api)?
