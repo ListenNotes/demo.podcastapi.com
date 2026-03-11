@@ -2,6 +2,9 @@
   "name": "podcast-api-demo",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "22.x"
+  },
   "dependencies": {
     "podcast-api": "^2.0.2",
     "react": "^18.2.0",
@@ -10,8 +13,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "dev": "wrangler pages dev --binding LISTEN_API_KEY=$LISTEN_API_KEY -- npx react-scripts start"
+    "dev:web": "react-scripts start",
+    "dev:pages": "wrangler pages dev public --binding LISTEN_API_KEY=${LISTEN_API_KEY:-} --port 8788 --compatibility-date=2026-03-11",
+    "dev": "concurrently -k -n WEB,PAGES \"yarn dev:web\" \"yarn dev:pages\""
   },
+  "proxy": "http://127.0.0.1:8788",
   "eslintConfig": {
     "extends": [
       "react-app"
@@ -30,9 +36,11 @@
     ]
   },
   "devDependencies": {
-    "react-scripts": "5.0.1",
     "autoprefixer": "^10.4.12",
+    "concurrently": "^9.2.1",
     "postcss": "^8.4.18",
-    "tailwindcss": "^3.1.8"
+    "react-scripts": "5.0.1",
+    "tailwindcss": "^3.1.8",
+    "wrangler": "4.72.0"
   }
 }

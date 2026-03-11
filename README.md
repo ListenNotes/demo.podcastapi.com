@@ -38,14 +38,21 @@ and a ReactJs implementation for a web frontend that talks to the Cloudflare Pag
 
 ### On your local dev
 
+Make sure you're on Node.js 20+ for Wrangler 4.x.
+
 ```
-LISTEN_API_KEY=YOUR_SECRET_KEY yarn install && yarn dev
+LISTEN_API_KEY=YOUR_SECRET_KEY yarn install
+yarn dev
 ```
 
 [Where to get LISTEN_API_KEY](https://help.listennotes.com/en/articles/3416436-how-to-get-an-api-token-of-listen-notes-api)?
 
 
 If LISTEN_API_KEY is not set, then we'll use the [API mock server](https://www.listennotes.help/article/48-how-to-test-the-podcast-api-without-an-api-key) that returns fake data.
+
+`yarn dev` runs:
+- `react-scripts` on port `3000`.
+- `wrangler pages dev` (functions + Pages runtime) on port `8788`.
 
 ### Deploy to Cloudflare Pages
 
