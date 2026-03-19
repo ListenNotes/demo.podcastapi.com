@@ -1,10 +1,10 @@
-# Podcast API Demo (Cloudflare Pages)
+# Podcast API Demo (Cloudflare Workers / Pages)
 
 ![Apache 2](https://img.shields.io/hexpm/l/plug.svg)
 
-A simplified podcast search engine web app, using [Cloudflare Pages](https://pages.cloudflare.com/) (Javascript) and [Listen API](https://www.listennotes.com/api/).
+A simplified podcast search engine web app, using [Cloudflare Workers](https://workers.cloudflare.com/) static assets, [Cloudflare Pages](https://pages.cloudflare.com/) Functions-compatible code, and [Listen API](https://www.listennotes.com/api/).
 
-In the [functions](https://developers.cloudflare.com/pages/platform/functions/) code, we use our [official podcast api package](https://github.com/ListenNotes/podcast-api-js) to talk to Listen API.
+In the [functions](https://developers.cloudflare.com/pages/platform/functions/) code, we use our [official podcast api package](https://github.com/ListenNotes/podcast-api-js) to talk to Listen API. The same API handler is also wired into a Worker entrypoint so the repo can be deployed through Cloudflare's Deploy button.
 
 You can find code snippets in different languages on the [API Docs](https://www.listennotes.com/api/docs/) page,
 including [Node.js](https://github.com/ListenNotes/podcast-api-js),
@@ -54,9 +54,23 @@ If LISTEN_API_KEY is not set, then we'll use the [API mock server](https://www.l
 - `react-scripts` on port `3000`.
 - `wrangler pages dev` (functions + Pages runtime) on port `8788`.
 
-### Deploy to Cloudflare Pages
+Local development still uses `wrangler pages dev` because it is a simple way to run the Functions-compatible API locally. Production deploys use `wrangler deploy` with the checked-in [`wrangler.jsonc`](./wrangler.jsonc).
 
-Please follow instructions on [Cloudflare Pages Docs](https://developers.cloudflare.com/pages/get-started/) to deploy to production.
+### Deploy to Cloudflare
+
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/ListenNotes/demo.podcastapi.com)
+
+The deploy flow will:
+- run `yarn build`
+- upload the React app from `build/` as Workers static assets
+- prompt for the optional `LISTEN_API_KEY` secret (leave it blank to use the mock server)
+
+You can also deploy manually:
+
+```
+yarn build
+yarn deploy
+```
 
 You need to set the build command at /settings/production :
 

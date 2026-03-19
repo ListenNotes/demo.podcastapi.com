@@ -13,9 +13,17 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "wrangler deploy",
     "dev:web": "react-scripts start",
     "dev:pages": "wrangler pages dev public --binding LISTEN_API_KEY=${LISTEN_API_KEY:-} --port 8788 --compatibility-date=2026-03-11",
     "dev": "concurrently -k -n WEB,PAGES \"yarn dev:web\" \"yarn dev:pages\""
+  },
+  "cloudflare": {
+    "bindings": {
+      "LISTEN_API_KEY": {
+        "description": "Paste your Listen Notes API key here. Leave it blank to use the mock server."
+      }
+    }
   },
   "proxy": "http://127.0.0.1:8788",
   "eslintConfig": {
