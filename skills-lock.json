@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "podcast-api": {
+      "source": "PodcastAPI/skills",
+      "sourceType": "github",
+      "skillPath": "skills/podcast-api/SKILL.md",
+      "computedHash": "f5d74d58034650cfb8a54d84ee7980cd6d5258c395e9fd99ca6fea885c6b39f3"
+    }
+  }
+}
