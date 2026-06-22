@@ -3,6 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "packageManager": "yarn@4.7.0",
+  "cloudflare": {
+    "bindings": {
+      "LISTEN_API_KEY": {
+        "description": "Paste a Listen Notes API key from [PodcastAPI.com](https://www.listennotes.com/api/pricing/). If you leave this blank, the demo uses the Listen Notes API mock server."
+      }
+    }
+  },
   "engines": {
     "node": "22.x"
   },
@@ -12,11 +19,12 @@
     "react-dom": "^18.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "yarn dev",
     "build": "react-scripts build",
+    "deploy": "wrangler deploy",
     "dev:web": "react-scripts start",
-    "dev:pages": "wrangler pages dev public --binding LISTEN_API_KEY=${LISTEN_API_KEY:-} --port 8788 --compatibility-date=2026-03-11",
-    "dev": "concurrently -k -n WEB,PAGES \"yarn dev:web\" \"yarn dev:pages\""
+    "dev:worker": "wrangler dev --port 8788",
+    "dev": "yarn build && concurrently -k -n WORKER,WEB \"yarn dev:worker\" \"yarn dev:web\""
   },
   "proxy": "http://127.0.0.1:8788",
   "eslintConfig": {

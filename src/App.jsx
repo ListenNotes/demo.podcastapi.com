@@ -206,7 +206,7 @@ function App() {
       <main className="app-main">
         <header className="hero">
           <p className="hero-kicker">
-            <a href="https://www.listennotes.com/api/" target="_blank"><b>Listen Notes</b></a> x <a href="https://pages.cloudflare.com/" target="_blank"><b>Cloudflare Pages</b></a>
+            <a href="https://www.listennotes.com/api/" target="_blank"><b>Listen Notes</b></a> x <a href="https://workers.cloudflare.com/" target="_blank"><b>Cloudflare Workers</b></a>
           </p>
           <h1 className="hero-title">Podcast Search API Demo</h1>
           <p className="hero-subtitle">
@@ -230,6 +230,14 @@ function App() {
             rel="noopener noreferrer"
           >
             API Docs
+          </a>
+          <a
+            className="hero-cta hero-cta-secondary"
+            href="https://github.com/podcastapi/skills"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Podcast API Skills
           </a>
         </div>
 

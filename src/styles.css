@@ -87,21 +87,26 @@ a:hover {
 
 .hero-cta-row {
   margin-top: 14px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  width: min(100%, 620px);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 14px;
+  min-width: 0;
+  padding: 9px 7px;
   border-radius: 999px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.01em;
+  line-height: 1.15;
+  text-align: center;
   border: 1px solid transparent;
   transition: transform 150ms ease, filter 150ms ease, background-color 150ms ease;
 }
@@ -481,6 +486,19 @@ a:hover {
 @media (min-width: 700px) {
   .app-shell {
     padding: 38px 26px 52px;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .hero-cta {
+    padding: 10px 14px;
+    font-size: 14px;
   }
 
   .search-row {
