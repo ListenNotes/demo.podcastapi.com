@@ -26,9 +26,9 @@ If `LISTEN_API_KEY` is not set, the Worker uses the [Listen Notes API mock serve
 
 Click the button at the top of this README to deploy this public GitHub repository into your Cloudflare account.
 
-During setup, Cloudflare will clone the repository, build the React app, deploy the Worker, and prompt for the `LISTEN_API_KEY` secret declared in `.dev.vars.example`.
+During setup, Cloudflare will clone the repository, build the React app, and deploy the Worker. No API key is required for the initial deployment.
 
-If you skip the secret during setup, the deployed app still works against the mock API server. To fetch real podcast data later, add `LISTEN_API_KEY` in your Worker's Variables and Secrets settings.
+The deployed app works against the mock API server by default. To fetch real podcast data later, add `LISTEN_API_KEY` in your Worker's Variables and Secrets settings.
 
 ## Local Development
 
@@ -36,7 +36,7 @@ Make sure you are using Node.js 22.
 
 ```bash
 yarn install
-cp .dev.vars.example .dev.vars
+cp .dev.vars.sample .dev.vars
 ```
 
 To use real Listen Notes API data locally, put your API key in `.dev.vars`:

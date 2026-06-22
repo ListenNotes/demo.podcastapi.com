@@ -3,13 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "packageManager": "yarn@4.7.0",
-  "cloudflare": {
-    "bindings": {
-      "LISTEN_API_KEY": {
-        "description": "Paste a Listen Notes API key from [PodcastAPI.com](https://www.listennotes.com/api/pricing/). If you leave this blank, the demo uses the Listen Notes API mock server."
-      }
-    }
-  },
   "engines": {
     "node": "22.x"
   },
