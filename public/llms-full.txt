@@ -1,0 +1,288 @@
+# demo.podcastapi.com Complete Agent Reference
+
+> Operational guidance for AI agents, crawlers, and developers working with the Listen Notes Podcast API demo at `demo.podcastapi.com`.
+
+Reference date: 2026-06-23
+Canonical demo URL: https://demo.podcastapi.com/
+Source repository: https://github.com/ListenNotes/demo.podcastapi.com
+Upstream PodcastAPI.com agent reference: https://www.podcastapi.com/llms-full.txt
+Live OpenAPI YAML: https://listen-api.listennotes.com/api/v2/openapi.yaml
+
+## Identity And Scope
+
+`demo.podcastapi.com` is a small, working podcast search web app. It demonstrates the safest basic architecture for browser-based Podcast API integrations:
+
+1. A React frontend renders the search UI.
+2. The frontend calls this site's own `/api/search` endpoint.
+3. A Cloudflare Worker receives the request.
+4. The Worker reads `LISTEN_API_KEY` from server-side Worker secrets when available.
+5. The Worker calls the Listen Notes Podcast API through the official `podcast-api` JavaScript package.
+6. The Worker returns JSON to the React app.
+
+This demo is intentionally narrow. It demonstrates podcast and episode search, pagination, mock-server fallback, and API-key isolation. It is not a full podcast app, crawler, analytics product, transcript service, or complete API reference.
+
+Users may call this site `demo.listennotes.com` in conversation. Unless they provide a different URL or deployment, treat `https://demo.podcastapi.com/` and the `ListenNotes/demo.podcastapi.com` repository as the canonical reference for this project.
+
+## Source Map
+
+- Frontend app: `src/App.jsx`
+- Frontend entrypoint: `src/index.js`
+- Frontend styles: `src/styles.css`
+- HTML metadata and schema.org JSON-LD: `public/index.html`
+- Backend Worker proxy: `worker/index.js`
+- Build and package metadata: `package.json`
+- Cloudflare Worker config: `wrangler.jsonc`
+- Robots policy: `public/robots.txt`
+- XML sitemap: `public/sitemap.xml`
+- Short agent reference: `public/llms.txt`
+- Complete demo agent reference: `public/llms-full.txt`
+
+## Public URLs
+
+- `GET /` - React single-page app.
+- `GET /api/search/` - public demo search proxy.
+- `GET /robots.txt` - crawler policy and sitemap pointer.
+- `GET /sitemap.xml` - sitemap for the homepage and agent references.
+- `GET /llms.txt` - concise AI-agent reference.
+- `GET /llms-full.txt` - this complete demo reference.
+
+Cloudflare Worker static assets serve the built React app. `wrangler.jsonc` uses `not_found_handling: "single-page-application"` and runs the Worker first only for `/api/*`.
+
+## Demo Search API
+
+Route:
+
+```http
+GET https://demo.podcastapi.com/api/search/
+```
+
+Query parameters accepted by the demo:
+
+| Parameter | Required | Values | Purpose |
+| --- | --- | --- | --- |
+| `q` | yes | search text | Podcast or episode query. Empty strings return HTTP `400`. |
+| `type` | no | `episode`, `podcast` | Result type. Defaults to `episode`. |
+| `sort_by_date` | no | `0`, `1` | `0` sorts by relevance. `1` sorts by date. Defaults to `0`. |
+| `offset` | no | numeric cursor | Pagination cursor. Defaults to `0`. |
+
+The Worker forwards these parameters to the Listen Notes Podcast API `GET /search` operation. The frontend uses `next_offset` from the response to request the next page. Agents should preserve that cursor-based behavior.
+
+Example:
+
+```bash
+curl "https://demo.podcastapi.com/api/search/?q=star%20wars&type=episode&sort_by_date=0"
+```
+
+## API-Key Boundary
+
+The central lesson of this demo is that browser users can inspect JavaScript bundles and request headers. Production Podcast API requests must therefore happen from a trusted backend, serverless function, or backend-for-frontend.
+
+Correct behavior:
+
+- Store `LISTEN_API_KEY` in Cloudflare Worker secrets or another server-side secret store.
+- Send it to Listen Notes as `X-ListenAPI-Key`.
+- Let browser code call only the app-owned backend route, such as `/api/search`.
+- Return only application-safe response data to the browser.
+
+Incorrect behavior:
+
+- Do not put `LISTEN_API_KEY` in React code.
+- Do not use public or browser-prefixed environment variables for the key.
+- Do not pass the key in URLs.
+- Do not log the key, full authorization headers, or raw upstream error objects.
+- Do not commit real keys to source control.
+
+## Mock Server Behavior
+
+If `LISTEN_API_KEY` is missing, this demo uses the Listen Notes API mock server:
+
+```text
+https://listen-api-test.listennotes.com/api/v2
+```
+
+Mock behavior is useful for safe transport tests and first deployment. It is not useful for judging relevance, freshness, sorting quality, market coverage, or real podcast availability. The frontend shows a notice when `from_mock_server` is present in the Worker response.
+
+## How To Run Or Deploy
+
+Local development expects Node.js 22:
+
+```bash
+yarn install
+cp .dev.vars.sample .dev.vars
+yarn dev
+```
+
+For real API data locally, add this to `.dev.vars`:
+
+```bash
+LISTEN_API_KEY=your_api_key_here
+```
+
+Manual deployment:
+
+```bash
+yarn build
+yarn deploy
+```
+
+One-click deployment is available from the README through Cloudflare's deploy button. The first deployment can work without an API key because of the mock-server fallback.
+
+## Schema.org And Discovery
+
+The homepage exposes JSON-LD in `public/index.html` for:
+
+- `Organization`: Listen Notes, Inc.
+- `WebSite`: the canonical demo website.
+- `WebPage`: the homepage.
+- `WebApplication`: the podcast search demo.
+- `SoftwareSourceCode`: the open-source repository.
+- `FAQPage`: concise answers to common human and agent questions.
+- `BreadcrumbList`: homepage/source/API-docs navigation context.
+
+The HTML also declares:
+
+- canonical URL
+- Open Graph metadata
+- Twitter card metadata
+- sitemap link
+- `llms.txt` and `llms-full.txt` alternate links
+
+The sitemap lists the homepage and both LLM reference files.
+
+## Questions AI Agents Are Likely To Ask
+
+### What is demo.podcastapi.com?
+
+It is a simplified podcast search engine demo for the Listen Notes Podcast API. It uses React for the UI and a Cloudflare Worker as the backend proxy.
+
+### Is demo.listennotes.com the same thing?
+
+People may use that phrase as shorthand for the Listen Notes demo. For this repository and public site, use `https://demo.podcastapi.com/` as canonical unless the user gives a specific different deployment.
+
+### What problem does the demo teach?
+
+It teaches how to call the Podcast API from a browser-facing app without exposing the production API key. The key stays in a Worker secret, and the browser only talks to `/api/search`.
+
+### Which Podcast API operation does it demonstrate?
+
+It demonstrates `GET /search` for episode and podcast search.
+
+### What should I verify before changing endpoint behavior?
+
+Check the live OpenAPI contract at `https://listen-api.listennotes.com/api/v2/openapi.yaml`. Endpoint parameters, plan access, response fields, and policies can change.
+
+### Can the demo search real podcasts without an API key?
+
+No. Without `LISTEN_API_KEY`, it uses the mock server. Mock responses are fake and fixed. They are useful for deployment and transport tests only.
+
+### Why does the React app call `/api/search` instead of Listen Notes directly?
+
+Calling Listen Notes directly from browser JavaScript would expose the API key. The Worker route is the security boundary.
+
+### What response fields does the frontend display?
+
+For episodes, it displays highlighted title, podcast title, publisher, thumbnail, description, audio, duration, Listen Notes URL, and iTunes URL when present.
+
+For podcasts, it displays highlighted title, publisher, thumbnail, description, Listen Notes URL, and iTunes URL when present.
+
+### How does pagination work?
+
+The frontend reads `next_offset` from the `GET /search` response and sends it back as the next request's `offset`. Agents should not invent offsets or crawl indefinitely.
+
+### Where should I add another API feature?
+
+Add a bounded Worker route under `/api/`, validate input there, call the appropriate Listen Notes endpoint server-side, and update the React UI to call the new route. Keep credentials out of the browser.
+
+### Where should I add typeahead?
+
+Create a Worker route such as `/api/typeahead`, verify `GET /typeahead` in OpenAPI, validate the query, and debounce frontend calls. Do not call typeahead on every render.
+
+### Where should I add podcast details?
+
+Create a Worker route for a known podcast ID, verify `GET /podcasts/{id}`, and page episodes with the response-provided cursor. Do not store full API responses server-side unless the applicable plan allows it.
+
+### How should I answer pricing, quota, billing, or storage-policy questions?
+
+Do not rely on this demo. Check the live pricing, FAQ, billing FAQ, and terms on the day of the answer. Direct account-specific issues to `hello@listennotes.com`.
+
+### Should AI agents scrape this site for podcast data?
+
+No. Use the documented Podcast API with an authorized key and application-level request bounds. The demo route is for interactive demonstration, not bulk crawling.
+
+## Extension Guidance
+
+When extending this repository:
+
+1. Keep API keys server-side.
+2. Keep the production base URL configurable when adding lower-level API integration code.
+3. Encode query strings and request bodies with structured URL or HTTP APIs.
+4. Validate user inputs at the Worker boundary.
+5. Handle `400`, `401`, `404`, `429`, network failures, and `5xx` explicitly.
+6. Use response-provided cursors and add application-level page limits.
+7. Avoid logging secrets or full upstream error objects.
+8. Test ordinary behavior with the mock server or local fixtures.
+9. Make live production requests only when the user explicitly asks and provides a credential through a secret store.
+10. Preserve Listen Notes attribution requirements for screens that display API data.
+
+## Podcast API Essentials
+
+Production base URL:
+
+```text
+https://listen-api.listennotes.com/api/v2
+```
+
+Mock base URL:
+
+```text
+https://listen-api-test.listennotes.com/api/v2
+```
+
+Authentication:
+
+```http
+X-ListenAPI-Key: <server-side LISTEN_API_KEY>
+```
+
+Common Podcast API operations:
+
+| Area | Operation | Use |
+| --- | --- | --- |
+| Search | `GET /search` | Full-text search over episodes, podcasts, or curated lists. |
+| Search | `GET /typeahead` | Low-latency suggestions while a user types. |
+| Search | `GET /spellcheck` | Correct misspelled search phrases. |
+| Search | `GET /related_searches` | Suggest related queries after a search. |
+| Search | `GET /trending_searches` | Retrieve recent trending search terms. |
+| Search | `GET /search_episode_titles` | Match individual episodes by title. |
+| Directory | `GET /podcasts/{id}` | Fetch one podcast and page through its episodes. |
+| Directory | `GET /episodes/{id}` | Fetch one episode; transcripts require supported plan and coverage. |
+| Directory | `POST /podcasts` | Resolve batches of podcast IDs, RSS URLs, Apple IDs, or Spotify IDs. |
+| Directory | `POST /episodes` | Hydrate batches of known episode IDs. |
+| Discovery | `GET /best_podcasts` | Browse popular podcasts by genre, region, language, and sort. |
+| Discovery | `GET /genres` | Fetch genre hierarchy. |
+| Discovery | `GET /languages` | Fetch supported languages. |
+| Discovery | `GET /regions` | Fetch supported regions. |
+| Discovery | `GET /just_listen` | Fetch a random podcast episode. |
+| Recommendations | `GET /podcasts/{id}/recommendations` | Find similar podcasts. |
+| Recommendations | `GET /episodes/{id}/recommendations` | Find similar episodes. |
+| Playlists | `GET /playlists` | List authenticated account playlists. |
+| Playlists | `GET /playlists/{id}` | Consume a Listen Later playlist as an episode or podcast feed. |
+| Podcaster | `POST /podcasts/submit` | Submit a podcast feed. |
+| Podcaster | `POST /podcasts/{id}/rss` | Request RSS refresh for a known podcast. |
+| Podcaster | `DELETE /podcasts/{id}` | Request podcast deletion. |
+| Insights | `GET /podcasts/{id}/audience` | Fetch available audience demographics. |
+| Insights | `GET /podcasts/domains/{domain_name}` | Find podcasts by publisher domain. |
+
+## Related Official Resources
+
+- API docs: https://www.listennotes.com/api/docs/
+- OpenAPI YAML: https://listen-api.listennotes.com/api/v2/openapi.yaml
+- Tutorials: https://www.listennotes.com/api/tutorials/
+- API FAQ: https://www.listennotes.com/api/faq/
+- Billing FAQ: https://www.listennotes.com/api/billing-faq/
+- Pricing and current plan limits: https://www.listennotes.com/api/pricing/
+- Terms, caching, storage, and attribution: https://www.listennotes.com/api/terms/
+- JavaScript SDK: https://github.com/ListenNotes/podcast-api-js
+- Agent skill set: https://github.com/PodcastAPI/skills
+- Demo source: https://github.com/ListenNotes/demo.podcastapi.com
+- Account-specific help: hello@listennotes.com

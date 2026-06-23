@@ -44,6 +44,6 @@
     "postcss": "^8.4.18",
     "react-scripts": "5.0.1",
     "tailwindcss": "4.2.1",
-    "wrangler": "4.72.0"
+    "wrangler": "4.104.0"
   }
 }

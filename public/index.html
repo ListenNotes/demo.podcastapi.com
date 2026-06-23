@@ -9,14 +9,30 @@
   <meta name="description"
         content="Demo of Listen Notes Podcast API for Search, Directory, and Insights. Hosted on Cloudflare Workers.">
   <meta name="author" content="Listen Notes, Inc.">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords"
+        content="Podcast API, Listen Notes API, podcast search API, episode search API, Cloudflare Workers demo, React podcast app">
+  <meta name="application-name" content="Podcast API Demo">
 
   <meta property="og:title" content="Podcast API Demo: Search, Directory, and Insights">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://demo.podcastapi.com/">
+  <meta property="og:site_name" content="Podcast API Demo">
   <meta property="og:description"
         content="Demo of Listen Notes Podcast API for Search, Directory, and Insights. Hosted on Cloudflare Workers.">
   <meta property="og:image"
         content="https://cdn-images-1.listennotes.com/web/image/f05a8616d968438c9e04aee54bbf2893.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Podcast API Demo: Search, Directory, and Insights">
+  <meta name="twitter:description"
+        content="Search podcasts and episodes with a React and Cloudflare Workers demo powered by the Listen Notes Podcast API.">
+  <meta name="twitter:image"
+        content="https://cdn-images-1.listennotes.com/web/image/f05a8616d968438c9e04aee54bbf2893.png">
 
+  <link rel="canonical" href="https://demo.podcastapi.com/">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <link rel="alternate" type="text/plain" title="LLMs.txt" href="/llms.txt">
+  <link rel="alternate" type="text/plain" title="Full LLM agent reference" href="/llms-full.txt">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
@@ -24,6 +40,269 @@
   <link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#b82f00">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.listennotes.com/#organization",
+        "name": "Listen Notes, Inc.",
+        "url": "https://www.listennotes.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://cdn-images-1.listennotes.com/web/image/f05a8616d968438c9e04aee54bbf2893.png"
+        },
+        "sameAs": [
+          "https://github.com/ListenNotes",
+          "https://www.podcastapi.com/",
+          "https://www.listennotes.com/api/"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.podcastapi.com/#website",
+        "name": "PodcastAPI.com",
+        "url": "https://www.podcastapi.com/",
+        "description": "Developer resources for the Listen Notes Podcast API.",
+        "publisher": {
+          "@id": "https://www.listennotes.com/#organization"
+        },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "WebAPI",
+        "@id": "https://www.podcastapi.com/#webapi",
+        "name": "Listen Notes Podcast API",
+        "alternateName": [
+          "PodcastAPI.com",
+          "Podcast API"
+        ],
+        "url": "https://www.podcastapi.com/",
+        "description": "The Listen Notes Podcast API provides podcast and episode search, directory metadata, discovery, playlists, and audience insights for server-side applications and agents.",
+        "provider": {
+          "@id": "https://www.listennotes.com/#organization"
+        },
+        "documentation": "https://www.listennotes.com/api/docs/",
+        "termsOfService": "https://www.listennotes.com/api/terms/",
+        "endpointUrl": "https://listen-api.listennotes.com/api/v2",
+        "serviceUrl": "https://listen-api.listennotes.com/api/v2",
+        "sameAs": [
+          "https://www.podcastapi.com/",
+          "https://www.listennotes.com/api/",
+          "https://listen-api.listennotes.com/api/v2/openapi.yaml"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "name": "Podcast API plans and pricing",
+          "url": "https://www.podcastapi.com/pricing/",
+          "description": "Podcast API plans are available at PodcastAPI.com."
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://demo.podcastapi.com/#website",
+        "name": "Podcast API Demo",
+        "alternateName": [
+          "Listen Notes Podcast API Demo",
+          "PodcastAPI.com Demo",
+          "demo.listennotes.com Podcast API demo"
+        ],
+        "url": "https://demo.podcastapi.com/",
+        "description": "A React and Cloudflare Workers demo for searching podcasts and episodes with the Listen Notes Podcast API.",
+        "inLanguage": "en",
+        "publisher": {
+          "@id": "https://www.listennotes.com/#organization"
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://demo.podcastapi.com/api/search/?q={search_term_string}&type=episode&sort_by_date=0",
+            "httpMethod": "GET",
+            "encodingType": "application/x-www-form-urlencoded",
+            "contentType": "application/json"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://demo.podcastapi.com/#webpage",
+        "url": "https://demo.podcastapi.com/",
+        "name": "Podcast API Demo: Search, Directory, and Insights",
+        "description": "Search podcasts and episodes with a live demo of the Listen Notes Podcast API using React and Cloudflare Workers.",
+        "isPartOf": {
+          "@id": "https://demo.podcastapi.com/#website"
+        },
+        "about": [
+          {
+            "@id": "https://demo.podcastapi.com/#webapp"
+          },
+          {
+            "@id": "https://www.podcastapi.com/#webapi"
+          }
+        ],
+        "mainEntity": {
+          "@id": "https://demo.podcastapi.com/#webapp"
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://cdn-images-1.listennotes.com/web/image/f05a8616d968438c9e04aee54bbf2893.png"
+        },
+        "breadcrumb": {
+          "@id": "https://demo.podcastapi.com/#breadcrumb"
+        },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://demo.podcastapi.com/#webapp",
+        "name": "Podcast Search API Demo",
+        "url": "https://demo.podcastapi.com/",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires a modern web browser with JavaScript enabled.",
+        "description": "A working podcast and episode search demo that protects the Listen Notes Podcast API key behind a Cloudflare Worker.",
+        "softwareRequirements": "Cloudflare Workers for the backend proxy; optional LISTEN_API_KEY secret for real Podcast API data.",
+        "featureList": [
+          "Search podcast episodes",
+          "Search podcasts",
+          "Sort search results by relevance or date",
+          "Paginate with the Podcast API next_offset cursor",
+          "Keep LISTEN_API_KEY server-side in a Cloudflare Worker",
+          "Use the Listen Notes mock API server when no key is configured"
+        ],
+        "keywords": "podcast search API, episode search API, Listen Notes API, PodcastAPI.com, Cloudflare Workers, React",
+        "isAccessibleForFree": true,
+        "license": "https://www.apache.org/licenses/LICENSE-2.0",
+        "codeRepository": "https://github.com/ListenNotes/demo.podcastapi.com",
+        "isBasedOn": {
+          "@id": "https://www.podcastapi.com/#webapi"
+        },
+        "provider": {
+          "@id": "https://www.listennotes.com/#organization"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "sameAs": [
+          "https://github.com/ListenNotes/demo.podcastapi.com",
+          "https://www.listennotes.com/api/docs/",
+          "https://www.podcastapi.com/"
+        ]
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "@id": "https://github.com/ListenNotes/demo.podcastapi.com#source",
+        "name": "ListenNotes/demo.podcastapi.com",
+        "codeRepository": "https://github.com/ListenNotes/demo.podcastapi.com",
+        "programmingLanguage": [
+          "JavaScript",
+          "React"
+        ],
+        "runtimePlatform": [
+          "Cloudflare Workers",
+          "Node.js 22"
+        ],
+        "license": "https://www.apache.org/licenses/LICENSE-2.0",
+        "targetProduct": {
+          "@id": "https://demo.podcastapi.com/#webapp"
+        },
+        "about": "Reference implementation for a browser podcast search app that calls the Listen Notes Podcast API through a server-side Cloudflare Worker proxy."
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://demo.podcastapi.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is demo.podcastapi.com?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "demo.podcastapi.com is a simplified podcast search engine web app that demonstrates the Listen Notes Podcast API with a React frontend and Cloudflare Worker backend."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which Podcast API endpoint does this demo use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The demo uses its own /api/search route, which proxies browser requests to the Listen Notes Podcast API GET /search endpoint."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does the browser receive LISTEN_API_KEY?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. LISTEN_API_KEY is read by the Cloudflare Worker on the server side. The React app calls /api/search and never needs the production API key."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can this demo run without a Listen Notes API key?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. If LISTEN_API_KEY is not configured, the Worker uses the Listen Notes API mock server, which returns fixed fake data for transport testing and first deployment."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where is the source code?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The source code is in the public GitHub repository ListenNotes/demo.podcastapi.com."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is demo.listennotes.com the canonical URL?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use https://demo.podcastapi.com/ as the canonical URL for this project unless a user explicitly provides another deployment."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where can developers find Podcast API plans?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Podcast API plans and pricing are available at https://www.podcastapi.com/pricing/."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://demo.podcastapi.com/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Podcast API Demo",
+            "item": "https://demo.podcastapi.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Source Code",
+            "item": "https://github.com/ListenNotes/demo.podcastapi.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Podcast API Docs",
+            "item": "https://www.listennotes.com/api/docs/"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>

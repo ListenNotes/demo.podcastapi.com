@@ -1,2 +1,9 @@
 User-agent: *
 Allow: /
+
+# Agent-friendly references
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /sitemap.xml
+
+Sitemap: https://demo.podcastapi.com/sitemap.xml
