@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "podcast-api-demo",
+  "name": "demo-podcastapi-com",
   "main": "worker/index.js",
   "compatibility_date": "2026-06-22",
   "assets": {
